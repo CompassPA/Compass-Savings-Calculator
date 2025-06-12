@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing Fee Savings Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: #f2f2f2;
+        max-width: 600px;
+        margin: auto;
+      }
+      h2, h3 {
+        text-align: center;
+        color: #2c3e50;
+      }
+      input, button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        background-color: #27ae60;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      button:hover {
+        background-color: #219150;
+      }
+      #results {
+        margin-top: 20px;
+        background: white;
+        padding: 15px;
+        border-radius: 5px;
+      }
+      .contact-buttons a {
+        text-decoration: none;
+      }
+      .contact-buttons button {
+        margin-top: 10px;
+        background-color: #2980b9;
+      }
+      .contact-buttons button:last-child {
+        background-color: #8e44ad;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Save on Credit Card Fees</h2>
+    <p style="text-align: center;">Show your potential savings in seconds!</p>
+
+    <label for="volume">Monthly Card Volume ($):</label>
+    <input type="number" id="volume" placeholder="e.g. 10000">
+
+    <label for="currentRate">Current Processing Rate (%):</label>
+    <input type="number" id="currentRate" placeholder="e.g. 3.2">
+
+    <label for="newRate">My Lower Rate Offer (%):</label>
+    <input type="number" id="newRate" placeholder="e.g. 2.5">
+
+    <button onclick="calculate()">Calculate Savings</button>
+
+    <div id="results">
+      <h3>Results</h3>
+      <p>Enter values above and tap calculate.</p>
+    </div>
+
+    <h3>Contact Me</h3>
+    <p>Want a free audit? Reach out:</p>
+
+    <div class="contact-buttons">
+      <a href="mailto:compasspaymentadvisors@yahoo.com?subject=Free%20Rate%20Audit&body=Hi%2C%20I%20just%20used%20your%20calculator%20and%20I'm%20interested%20in%20saving%20money%20on%20my%20processing%20fees!">
+        <button>Email Me</button>
+      </a>
+      <a href="tel:+17145613305">
+        <button>Call or Text Me</button>
+      </a>
+    </div>
+
+    <script>
+      function calculate() {
+        const volume = parseFloat(document.getElementById("volume").value);
+        const currentRate = parseFloat(document.getElementById("currentRate").value);
+        const newRate = parseFloat(document.getElementById("newRate").value);
+        const results = document.getElementById("results");
+
+        if (isNaN(volume) || isNaN(currentRate) || isNaN(newRate)) {
+          results.innerHTML = "<p style='color:red;'>Please enter valid numbers in all fields.</p>";
+          return;
+        }
+
+        const currentFees = volume * (currentRate / 100);
+        const newFees = volume * (newRate / 100);
+        const monthlySavings = currentFees - newFees;
+        const yearlySavings = monthlySavings * 12;
+
+        results.innerHTML = `
+          <p><strong>Current Fees:</strong> $${currentFees.toFixed(2)}</p>
+          <p><strong>My New Fees:</strong> $${newFees.toFixed(2)}</p>
+          <p style="color:green;"><strong>Monthly Savings:</strong> $${monthlySavings.toFixed(2)}</p>
+          <p style="color:green;"><strong>Yearly Savings:</strong> $${yearlySavings.toFixed(2)}</p>
+        `;
+      }
+    </script>
+  </body>
+</html>
